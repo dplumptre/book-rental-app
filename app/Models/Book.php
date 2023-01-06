@@ -13,4 +13,14 @@ class Book extends Model
         'name',
         'description',
     ];
+
+
+    public function rentages(){
+        return  $this->hasMany(Rentage::class,'book_id');
+    }
+
+
+
+
+
 }

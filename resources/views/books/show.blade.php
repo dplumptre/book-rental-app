@@ -19,11 +19,16 @@
 
                             <tbody>
                                 <tr>
-                                    <td>Name:</td>
+                                    <th class="text-success">Name:</th>
                                     <td>{{ $book->name }} </td>
                                 </tr>
                                 <tr>
-                                    <td>Description:</td>
+                                    <td>{{ $book->name }} </td>
+                                </tr>
+                                <tr>
+                                    <th class="text-success">Description:</th>
+                                </tr>
+                                <tr>
                                     <td>{{ $book->description }} </td>
                                 </tr>
                             </tbody>
