@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\RentageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('books',BookController::class);
+
+
+Route::get('rentage/admin',[App\Http\Controllers\RentageController::class,'showAllRentalRequest']);
+Route::get('rentage/',[App\Http\Controllers\RentageController::class,'showUserRentalRequest']);
+Route::get('rentage/books',[App\Http\Controllers\RentageController::class,'books']);
+Route::post('rentage/store',[App\Http\Controllers\RentageController::class,'store']);

@@ -32,7 +32,7 @@
                                     <tr>
                                         <th scope="row">{{ $key + 1 }}</th>
                                         <td>{{ $d->name }}</td>
-                                        <td>{{ $d->description }}</td>
+                                        <td>{{ substr($d->description, 0, 60) }}...</td>
                                         <td>
                                             <a href="{{ asset('books/' . $d->id) }}"><i class="fa fa-eye"></i></a>
                                             <a href="{{ asset('books/' . $d->id . '/edit') }}"><i
