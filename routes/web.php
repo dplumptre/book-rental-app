@@ -30,15 +30,19 @@ Route::get('/home', [
  *  Admin
  *
  * */
-Route::resource('books', BookController::class);
+Route::resource('books', BookController::class)->middleware('can:isAdmin');
 Route::get('rentage/admin', [
     App\Http\Controllers\RentageController::class,
     'showAllRentalRequest',
-]);
+])
+    ->name('rentage.admin')
+    ->middleware('can:isAdmin');
 Route::patch('rentage/status/{rentage}', [
     App\Http\Controllers\RentageController::class,
     'RentageStatus',
-])->name('rentage.status');
+])
+    ->name('rentage.status')
+    ->middleware('can:isAdmin');
 
 /***
  *  Users
@@ -48,19 +52,25 @@ Route::patch('rentage/status/{rentage}', [
 Route::get('rentage/books', [
     App\Http\Controllers\RentageController::class,
     'books',
-]);
+])->name('all.books');
+
 Route::get('rentage/', [
     App\Http\Controllers\RentageController::class,
     'showUserRentalRequest',
-]);
-Route::get('rentage/{book}', [
+])
+    ->name('rentage.books')
+    ->middleware('can:isUser');
+
+Route::get('rentage/{rentage}', [
     App\Http\Controllers\RentageController::class,
     'showUserRentedBook',
-]);
+])->middleware('can:isUser');
+
+// request button post
 Route::post('rentage/store', [
     App\Http\Controllers\RentageController::class,
     'store',
-]);
+])->middleware('can:isUser');
 
 Route::post('rentage/review/store', [
     App\Http\Controllers\RentageController::class,

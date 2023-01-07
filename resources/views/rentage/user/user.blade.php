@@ -6,6 +6,9 @@
         <div class="col-md-10">
 
 
+            <div class="alert alert-info">You can view book details only when the admin has approved your book request</div>
+
+
             @if (session('success'))
             <div class="alert alert-success" role="alert">
                 {{ session('success') }}
@@ -34,7 +37,12 @@
                                 <th scope="row">{{ $key + 1 }}</th>
                                 <td>{{ $d->books->name }}</td>
                                 <td>{{ $d->status }}</td>
-                                <td> <a href="{{ asset('rentage/'.$d->books->id)}}" class="btn btn-primary"> View & review</a></td>
+                                <td>
+
+                                    @if($d->status =="approved")
+                                    <a href="{{ asset('rentage/'.$d->id)}}" class="btn btn-primary"> View & review</a></td>
+                                @endif
+
                                 <td></td>
                             </tr>
                             @endforeach

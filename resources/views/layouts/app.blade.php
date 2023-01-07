@@ -32,6 +32,25 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
 
+                        @can ("isAdmin")
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('books.index') }}">{{ __('Manage books') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('rentage.admin') }}">{{ __('Book Requests') }}</a>
+                        </li>
+                        @endcan
+
+
+                        @can ("isUser")
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('all.books') }}">{{ __('Books') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('rentage.books') }}">{{ __('My Book Requests') }}</a>
+                        </li>
+                        @endcan
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
