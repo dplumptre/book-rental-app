@@ -3,6 +3,7 @@
 ## About Samic Book Rental
 
 -- It is a book rental app
+![screen-capture-2](https://user-images.githubusercontent.com/8981082/211166600-825c9960-3936-4142-bddf-35dcefa3b561.gif)
 
 ## Instructions
 1. run composer install to generate depedencies in vendor folder
