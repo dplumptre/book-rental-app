@@ -21,11 +21,48 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('books',BookController::class);
+Route::get('/home', [
+    App\Http\Controllers\HomeController::class,
+    'index',
+])->name('home');
 
+/***
+ *  Admin
+ *
+ * */
+Route::resource('books', BookController::class);
+Route::get('rentage/admin', [
+    App\Http\Controllers\RentageController::class,
+    'showAllRentalRequest',
+]);
+Route::patch('rentage/status/{rentage}', [
+    App\Http\Controllers\RentageController::class,
+    'RentageStatus',
+])->name('rentage.status');
 
-Route::get('rentage/admin',[App\Http\Controllers\RentageController::class,'showAllRentalRequest']);
-Route::get('rentage/',[App\Http\Controllers\RentageController::class,'showUserRentalRequest']);
-Route::get('rentage/books',[App\Http\Controllers\RentageController::class,'books']);
-Route::post('rentage/store',[App\Http\Controllers\RentageController::class,'store']);
+/***
+ *  Users
+ *
+ * */
+
+Route::get('rentage/books', [
+    App\Http\Controllers\RentageController::class,
+    'books',
+]);
+Route::get('rentage/', [
+    App\Http\Controllers\RentageController::class,
+    'showUserRentalRequest',
+]);
+Route::get('rentage/{book}', [
+    App\Http\Controllers\RentageController::class,
+    'showUserRentedBook',
+]);
+Route::post('rentage/store', [
+    App\Http\Controllers\RentageController::class,
+    'store',
+]);
+
+Route::post('rentage/review/store', [
+    App\Http\Controllers\RentageController::class,
+    'storeReview',
+]);
