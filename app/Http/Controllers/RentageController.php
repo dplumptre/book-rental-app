@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Rentage;
 use App\Models\Review;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Gate;
 
 class RentageController extends Controller
 {
@@ -17,8 +19,7 @@ class RentageController extends Controller
     public function showAllRentalRequest()
     {
         $books = Rentage::with('users', 'books.reviews.users')->get();
-        //dd($books);
-        return view('rentage.admin', compact('books'));
+        return view('rentage.admin.admin', compact('books'));
     }
 
     public function rentageStatus(Request $request, Rentage $rentage)
@@ -33,13 +34,18 @@ class RentageController extends Controller
         $data = Rentage::with('books')
             ->where('user_id', auth()->user()->id)
             ->get();
-        return view('rentage.user', compact('data'));
+        return view('rentage.user.user', compact('data'));
     }
 
     public function books()
     {
-        $data = Book::all();
-        return view('rentage.books', compact('data'));
+        $data = Book::with([
+            'rentages' => function ($query) {
+                $query->where('user_id', auth()->user()->id);
+            },
+        ])->get();
+        //dd($data);
+        return view('rentage.user.books', compact('data'));
     }
 
     public function store(Request $request)
@@ -52,10 +58,16 @@ class RentageController extends Controller
         return redirect('rentage');
     }
 
-    public function showUserRentedBook(Book $book)
+    public function showUserRentedBook(Rentage $rentage)
     {
-        $reviews = Review::where('book_id', $book->id)->get();
-        return view('rentage.book-details', compact('book', 'reviews'));
+        //dd($rentage);
+        if (!Gate::allows('viewRentage', $rentage)) {
+            abort(403);
+        }
+
+        $book = Book::find($rentage->book_id);
+        $reviews = Review::where('book_id', $rentage->book_id)->get();
+        return view('rentage.user.book-details', compact('book', 'reviews'));
     }
 
     public function storeReview(Request $request)
