@@ -9,18 +9,15 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'description',
-    ];
+    protected $fillable = ['name', 'description'];
 
-
-    public function rentages(){
-        return  $this->hasMany(Rentage::class,'book_id');
+    public function rentages()
+    {
+        return $this->hasMany(Rentage::class, 'book_id');
     }
 
-
-
-
-
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'book_id');
+    }
 }
