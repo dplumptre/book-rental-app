@@ -39,7 +39,7 @@
                                         @csrf
                                         <input type="hidden" name="book_id" value="{{ $d->id }}">
 
-                                        @if(count($d->rentages)>0 && $d->rentages->first()->status == "approved")
+                                        @if( (count($d->rentages)>0 && $d->rentages->first()->status == "approved") || (count($d->rentages)>0 && $d->rentages->first()->status == "pending"))
                                         <div class="text-danger"><i> requested</i>
 
                                         </div>
