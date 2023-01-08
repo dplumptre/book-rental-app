@@ -26,3 +26,20 @@
    3. php artisan serve
 
 3. You can create a user from the registration page and login
+
+
+## Credentials
+
+   Admin
+   admin@example.com
+   password
+
+   User
+   user@example.com
+   Password
+
+## Features
+1. Gates for role
+2. Registration creates users
+3. User can only view book details after it has been approved
+4. User cannot request a book already requested.
