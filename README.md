@@ -30,13 +30,13 @@
 
 ## Credentials
 
-   Admin
-   admin@example.com
-   password
+   ## Admin
+   - Email: admin@example.com
+   - Password: password
 
-   User
-   user@example.com
-   Password
+   ## User
+   - Email: user@example.com
+   - Password:Password
 
 ## Features
 1. Gates for role
