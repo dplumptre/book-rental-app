@@ -25,6 +25,12 @@
                                 <td>{{ $book->name }} </td>
                             </tr>
                             <tr>
+                                <th class="text-success">Price:</th>
+                            </tr>
+                            <tr>
+                                <td>{{ $book->price }} </td>
+                            </tr>
+                            <tr>
                                 <th class="text-success">Description:</th>
                             </tr>
                             <tr>
