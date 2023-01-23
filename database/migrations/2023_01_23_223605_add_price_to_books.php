@@ -12,11 +12,8 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('books', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->mediumText('description');
-            $table->timestamps();
+        Schema::table('books', function (Blueprint $table) {
+            $table->string('price');
         });
     }
 
@@ -27,6 +24,8 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('books');
+        Schema::table('books', function (Blueprint $table) {
+            $table->dropColumn('price');
+        });
     }
 };
