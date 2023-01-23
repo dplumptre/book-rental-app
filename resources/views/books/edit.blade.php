@@ -31,6 +31,10 @@
                             <input type="text" class="form-control" name="name" value="{{ $book->name }}">
                         </div>
                         <div class="mb-3">
+                            <label class="form-label">Book Price</label>
+                            <input type="text" class="form-control" name="price" value="{{ $book->price }}">
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label">Description</label>
                             <textarea placeholder="book desc..." class="form-control" name="description" rows="3">{{ $book->description }}</textarea>
                         </div>

@@ -7,13 +7,10 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
     }
-
-
 
     /**
      * Display a listing of the resource.
@@ -23,7 +20,7 @@ class BookController extends Controller
     public function index()
     {
         $data = Book::all();
-        return view('books.index',compact('data'));
+        return view('books.index', compact('data'));
     }
 
     /**
@@ -44,12 +41,16 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name'=>'required',
-            'description'=>'required',
+        $data = $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
         ]);
-        Book::create($request->all());
-        return redirect()->route('books.index')->with('success', 'Book was saved successfully');
+
+        Book::create($data);
+        return redirect()
+            ->route('books.index')
+            ->with('success', 'Book was saved successfully');
     }
 
     /**
@@ -60,7 +61,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        return view('books.show',compact('book'));
+        return view('books.show', compact('book'));
     }
 
     /**
@@ -71,7 +72,7 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        return view('books.edit',compact('book'));
+        return view('books.edit', compact('book'));
     }
 
     /**
@@ -83,12 +84,15 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        $request->validate([
-            'name'=>'required',
-            'description'=>'required',
+        $data = $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
         ]);
-        $book->update($request->all());
-        return redirect()->route('books.index')->with('success', 'Book was updated successfully');
+        $book->update($data);
+        return redirect()
+            ->route('books.index')
+            ->with('success', 'Book was updated successfully');
     }
 
     /**
